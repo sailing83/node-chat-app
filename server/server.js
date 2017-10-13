@@ -18,15 +18,45 @@ io.on('connection', (socket) => {
 		console.log('User is disconnected.');
 	});
 
-	socket.on('createMessage', (message) => {
-		console.log('createMessage', message);
-	})
+	socket.emit('newMessage', {
+		from: 'Admin',
+		text: 'Welcome to the chat app',
+		createdAt: new Date().getTime()
+	});
 
+	socket.broadcast.emit('newMessage', {
+		from: 'Admin',
+		text: 'New user joined',
+		createdAt: new Date().getTime()
+	});
+
+/*
+	socket.on('createMessage', (message) => {	//Listen to createMessage event
+		console.log('createMessage', message);
+		
+		io.emit('newMessage', {		//emit newMessage event
+			from: message.from,
+			text: message.text,
+			createdAt: new Date().getTime()
+		}); //emit an event to every single connection
+		// while socket.emit only emits an event to one connection
+		
+		socket.broadcast.emit('newMessage', {
+			from: message.from,
+			text: message.text,
+			createdAt: new Date().getTime()
+			//Broadcast a message: 
+			//Other all connections can receive the message, but the connection itself cannot.
+		});
+	})
+*/
+	/*
 	socket.emit('newMessage', {
 		from: 'John',
 		text: 'Nice to meet you',
 		createdAt: 2000
 	});
+	*/
 });
 
 server.listen(port, () => {
