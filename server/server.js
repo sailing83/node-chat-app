@@ -46,7 +46,11 @@ io.on('connection', (socket) => {
 			//Other all connections can receive the message, but the connection itself cannot.
 		});
 		*/
-	})
+	});
+
+	socket.on('createLocationMessage', (coords) => {
+		io.emit('newMessage', generateMessage('Admin', `Latitude: ${coords.latitude}, Longitude: ${coords.longitude}`));
+	});
 
 	/*
 	socket.emit('newMessage', {
