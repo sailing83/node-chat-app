@@ -36,7 +36,7 @@ io.on('connection', (socket) => {
 		// while socket.emit only emits an event to one connection
 		*/
 		io.emit('newMessage', generateMessage(message.from, message.text));
-		callback('This is from server.');
+		callback();
 		/*
 		socket.broadcast.emit('newMessage', {
 			from: message.from,

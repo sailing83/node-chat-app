@@ -3,21 +3,58 @@
 <head>
 	<meta charset="utf-8">
 	<title>Chat app - Index</title>
+	<link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
-<body>
-	<h1>Welcome to the chat app</h1>
+<body class="chat">
 
-	<ol id="messages">
-	</ol>
+	<div class="chat__sidebar">
+		<h3>Users</h3>
+		<div id="users"></div>
+	</div>
 
-	<form id="message-form">
-		<input type="text" name="message" placeholder="Message">
-		<button>Send</button>
-	</form>
-	<button id="send-location">Send Location</button>
+	<div class="chat__main">		
+		<ol id="messages" class="chat__messages">
+		</ol>
+
+		<div class="chat__footer">
+			<form id="message-form">
+				<input type="text" name="message" placeholder="Message" autofocus="autofocus" autocomplete="off">
+				<button>Send</button>
+			</form>
+			<button id="send-location">Send Location</button>
+		</div>
+	</div>
+
+	<script id="message-template" type="text/template">
+		<li class="message">
+			<div class="message__title">
+				<h4>{{from}}</h4>
+				<span>{{createdAt}}</span>
+			</div>
+			<div class="message__body">
+				<p>{{text}}</p>
+			</div>
+		</li>
+	</script>
+
+	<script id="location-message-template" type="text/template">
+		<li class="message">
+			<div class="message__title">
+				<h4>{{from}}</h4>
+				<span>{{createdAt}}</span>
+			</div>
+			<div class="message__body">
+				<p>
+					<a href="{{url}}" target="__blank">My current location</a>
+				</p>
+			</div>
+		</li>
+	</script>
 
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="/js/libs/jquery.min.js"></script>
+	<script src="/js/libs/moment.min.js"></script>
+	<script src="/js/libs/mustache.js"></script>
 	<script src="/js/index.js"></script>
 </body>
 </html>
